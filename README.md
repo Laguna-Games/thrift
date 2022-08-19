@@ -4,11 +4,11 @@ We mirror releases from `apache/thrift` by using `git filter-branch`.
 
 ```sh
 export TAG=v0.16.0
-git clone https://github.com/apache/thrift.git --branch $TAG
+git clone https://github.com/apache/thrift.git --branch $TAG --depth 1
 cd thrift
-git filter-branch --subdirectory-filter lib/erl -- --all
+git subtree split --prefix=lib/erl/ --branch=mirror
 git remote add mirror git@github.com:Laguna-Games/thrift.git
-git push -f mirror HEAD:refs/tags/$TAG
+git push -f mirror refs/heads/mirror:refs/tags/$TAG
 ```
 
 This can be used via Hex:
